@@ -68,6 +68,28 @@ main{overflow-x:clip}
 .prod{border-radius:24px;background:var(--soft);padding:22px;display:flex;flex-direction:column}
 .prod .pic{height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:16px}
 .prod .pic .sym{position:absolute;width:100%;opacity:.7}
+/* modo band */
+.mband{position:relative;overflow:hidden;background:var(--mc,#9be21f);color:var(--mi,#111);transition:background .4s,color .4s}
+.mband a{color:inherit}
+.mmark{position:absolute;right:-120px;bottom:-160px;width:980px;max-width:none;opacity:.1;pointer-events:none}
+.mrow{display:flex;flex-wrap:wrap;align-items:center;gap:24px;min-height:600px;margin-top:12px}
+.mnum{margin:0;font-size:34px;font-weight:800;letter-spacing:-.02em;opacity:.55;display:flex;align-items:center;gap:10px}
+.mdot{display:inline-block;width:11px;height:11px;border-radius:50%;background:currentColor}
+.mname{margin:0;font-size:clamp(96px,11vw,176px);line-height:.85;font-weight:900;letter-spacing:-.06em}
+.mflavor{margin:4px 0 0;font-size:clamp(44px,4.6vw,72px);line-height:.9;font-weight:900;letter-spacing:-.045em}
+.mstage{flex:1 1 380px;position:relative;height:580px;min-width:0}
+.mshadow{position:absolute;left:50%;bottom:70px;height:470px;transform:translateX(-38%) skewX(-34deg);transform-origin:50% 100%;filter:brightness(0) blur(10px);opacity:.26;pointer-events:none}
+.mfloor{position:absolute;left:50%;bottom:58px;width:230px;height:30px;transform:translateX(-46%);border-radius:50%;background:rgba(0,0,0,.32);filter:blur(12px)}
+.mcan{position:absolute;left:50%;bottom:66px;height:480px;transform:translateX(-50%)}
+.marrows{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:flex;gap:10px}
+.mround{width:44px;height:44px;border-radius:22px;border:2px solid currentColor;background:transparent;color:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.madd{height:52px;padding:0 26px;border-radius:26px;border:none;background:var(--mi,#111);color:var(--mc,#9be21f);font-weight:800;font-size:16px;cursor:pointer}
+.mqty{height:52px;border-radius:26px;border:2px solid currentColor;display:flex;align-items:center}
+.mqty button{width:44px;height:44px;border:none;background:transparent;font-size:20px;font-weight:700;cursor:pointer}
+.mqty span{min-width:22px;text-align:center;font-size:17px;font-weight:800}
+.mband .tabs button{border-color:color-mix(in srgb,currentColor 35%,transparent)}
+.mband .tabs button.on{background:var(--mi,#111);color:var(--mc,#9be21f);border-color:var(--mi,#111)}
+@media (max-width:900px){.mstage{height:460px}.mcan{height:360px}.mshadow{height:350px}.mrow{min-height:0}}
 footer{background:#000;color:#fff;padding:72px 0 36px;margin-top:40px}
 footer a{color:#fff}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(120px);background:#111;color:#fff;padding:14px 22px;border-radius:24px;font-weight:600;transition:transform .3s;z-index:50}
@@ -159,36 +181,56 @@ footer a{color:#fff}
       <img src="img/p_friends.webp" alt="amigos tomando latas modo" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px">
       <img src="img/p_fridge.webp" alt="heladera llena de latas modo" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px">
       <img src="img/p_pocket.webp" alt="latas modo en un bolsillo" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:65% 50%;border-radius:18px">
-      <img src="img/tote.webp" alt="bolsa de tela modo" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px">
+      <img src="img/tote.webp" alt="tote bag plateada modo" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px">
     </div>
   </div>
 </section>
 
 <!-- MODOS -->
 <section class="page" id="p-modos">
-  <div class="wrap" style="padding-top:32px">
-    <p style="margin:0;font-size:14px;color:#555"><a href="#inicio">inicio</a> / modos / <span id="m-crumb"></span></p>
-    <div class="tabs" id="tabs"></div>
-  </div>
-  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:48px;align-items:center;padding-top:40px;padding-bottom:60px">
-    <div style="flex:1 1 420px;position:relative;height:620px;display:flex;align-items:center;justify-content:center">
-      <img class="halo" id="m-sym" src="" alt="" style="position:absolute;width:130%;max-width:760px;opacity:.9">
-      <img id="m-can" src="" alt="" style="position:relative;height:560px;max-height:100%;filter:drop-shadow(0 34px 30px rgba(0,0,0,.2))">
+  <div class="mband" id="m-band">
+    <img class="mmark" id="m-mark" src="img/logo.webp" alt="">
+    <div class="wrap" style="position:relative;padding-top:28px;padding-bottom:36px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <p style="margin:0;font-size:14px;font-weight:600"><a href="#inicio">inicio</a> / modos / <span id="m-crumb"></span></p>
+        <div class="tabs" id="tabs" style="margin-top:0"></div>
+      </div>
+      <div class="mrow">
+        <div style="flex:1 1 300px;min-width:0">
+          <p class="mnum"><span id="m-num"></span><span class="mdot" aria-hidden="true"></span></p>
+          <h1 id="m-name" class="mname"></h1>
+          <p id="m-tags" style="margin:22px 0 0;font-size:20px;font-weight:700;line-height:1.3;white-space:pre-line"></p>
+        </div>
+        <div class="mstage">
+          <img id="m-shadow" class="mshadow" src="" alt="">
+          <div class="mfloor"></div>
+          <img id="m-can" class="mcan" src="" alt="">
+          <div class="marrows">
+            <button class="mround" id="m-prev" aria-label="modo anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button class="mround" id="m-next" aria-label="modo siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+        <div style="flex:1 1 280px;min-width:0">
+          <p style="margin:0;font-size:15px;font-weight:700;opacity:.7">sabor</p>
+          <h2 id="m-flavor" class="mflavor"></h2>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:30px;flex-wrap:wrap">
+            <button class="madd" id="m-add">agregar al carrito ›</button>
+            <div class="mqty"><button id="m-dec" aria-label="restar una lata">−</button><span id="m-qty">1</span><button id="m-inc" aria-label="sumar una lata">+</button></div>
+          </div>
+          <p style="margin:14px 0 0;font-size:15px;font-weight:600;opacity:.75">$ 120 · lata 330 ml · también en pack de 6</p>
+        </div>
+      </div>
     </div>
-    <div style="flex:999 1 520px;min-width:0">
-      <p id="m-num" style="margin:0;font-size:15px;font-weight:600;color:#555"></p>
-      <h1 class="h1" id="m-name" style="font-size:clamp(72px,9vw,128px)"></h1>
-      <p id="m-moment" style="margin:10px 0 0;font-size:22px;font-weight:700"></p>
-      <p class="lead" id="m-desc" style="margin:20px 0 0;max-width:560px"></p>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px;max-width:620px">
-        <div class="stat"><div>cuándo</div><div id="m-when"></div></div>
-        <div class="stat"><div>cafeína natural</div><div id="m-caf"></div></div>
-        <div class="stat"><div>azúcar</div><div>0 g</div></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:16px;margin-top:30px;flex-wrap:wrap">
-        <button class="btn" data-add>agregar al carrito · $ 120</button>
-        <span style="font-size:14px;color:#555">lata 330 ml · también en pack de 6</span>
-      </div>
+  </div>
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;padding-top:64px;padding-bottom:40px">
+    <div style="flex:1 1 420px;min-width:0">
+      <p id="m-moment" style="margin:0;font-size:22px;font-weight:700"></p>
+      <p class="lead" id="m-desc" style="margin:14px 0 0;max-width:560px"></p>
+    </div>
+    <div style="flex:1 1 420px;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+      <div class="stat"><div>cuándo</div><div id="m-when"></div></div>
+      <div class="stat"><div>cafeína natural</div><div id="m-caf"></div></div>
+      <div class="stat"><div>azúcar</div><div>0 g</div></div>
     </div>
   </div>
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:14px;padding-bottom:60px">
@@ -256,11 +298,11 @@ footer a{color:#fff}
   <div class="wrap"><div class="grid3" id="prods"></div></div>
   <div class="wrap" style="padding-top:40px;padding-bottom:80px">
     <div style="border-radius:28px;overflow:hidden;display:flex;flex-wrap:wrap;background:var(--soft)">
-      <div style="flex:1 1 380px;min-height:420px;position:relative"><img src="img/tote.webp" alt="bolsa de tela modo con halo violeta" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
+      <div style="flex:1 1 380px;min-height:420px;position:relative"><img src="img/tote.webp" alt="tote bag plateada modo con halo violeta" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
       <div style="flex:999 1 420px;min-width:0;padding:48px;display:flex;flex-direction:column;justify-content:center">
         <p style="margin:0;font-size:14px;font-weight:700;color:#555">merch</p>
         <h2 class="h2" style="margin-top:6px;font-size:clamp(40px,4.5vw,60px)">tote bag modo.</h2>
-        <p class="lead" style="margin:16px 0 0;font-size:17px;max-width:420px">algodón natural con el halo night. gratis con tu primer pack de 12.</p>
+        <p class="lead" style="margin:16px 0 0;font-size:17px;max-width:420px">plateada, con el halo night y el logo modo. gratis con tu primer pack de 12.</p>
         <button class="btn" data-add style="align-self:flex-start;margin-top:26px">agregar · $ 390</button>
       </div>
     </div>
@@ -293,19 +335,19 @@ footer a{color:#fff}
 
 <script>
 const MODOS={
- focus:{num:'m.01',name:'focus',moment:'estudiar · trabajar · crear',can:'can_focus_cut',sym:'sym_focus',flavor:'lemon + mint',photo:'p_cans',pos:'30% 50%',
+ focus:{color:'#9be21f',ink:'#111',tags:'concentración - trabajo\nestudio - creatividad',num:'m.01',name:'focus',moment:'estudiar · trabajar · crear',can:'can_focus_cut',sym:'sym_focus',flavor:'lemon + mint',photo:'p_cans',pos:'30% 50%',
   desc:'concentración estable, sin picos ni bajón. matcha con l-teanina y melena de león para las horas en que necesitás la cabeza on.',when:'mañana o antes de estudiar',caf:'80 mg · matcha',
   tipT:'bloques de 50 minutos',tipD:'estudiá en bloques con pausas de 10 minutos. tomá focus al empezar el primero, no a la noche.',
   keys:[['matcha + l-teanina','atención sostenida, sin nervios'],['melena de león','memoria y foco'],['citicolina','claridad mental'],['vitaminas b6 y b12','reducen el cansancio']]},
- night:{num:'m.02',name:'night',moment:'salir · bailar · disfrutar',can:'can_night_cut',sym:'sym_night',flavor:'passion fruit',photo:'p_friends',pos:'50% 30%',
+ night:{color:'#5e17eb',ink:'#fff',tags:'música - eventos\nfiesta - vida social',num:'m.02',name:'night',moment:'salir · bailar · disfrutar',can:'can_night_cut',sym:'sym_night',flavor:'passion fruit',photo:'p_friends',pos:'50% 30%',
   desc:'energía suave para que la noche dure lo que tiene que durar. guayusa y ginseng, con electrolitos para mantenerte hidratado.',when:'antes de salir',caf:'100 mg · guayusa',
   tipT:'agua entre medio',tipD:'la noche se disfruta más hidratado. alterná con agua y no mezcles energéticas con alcohol.',
   keys:[['guayusa','energía suave y sin picos'],['ginseng','resistencia'],['electrolitos','hidratación durante la noche'],['vitaminas b','energía']]},
- move:{num:'m.03',name:'move',moment:'entrenar · correr · moverte',can:'can_move_cut',sym:'sym_move',flavor:'raspberry + lime',photo:'p_pocket',pos:'65% 50%',
+ move:{color:'#ff1c59',ink:'#fff',tags:'deporte - actividad\nmovimiento',num:'m.03',name:'move',moment:'entrenar · correr · moverte',can:'can_move_cut',sym:'sym_move',flavor:'raspberry + lime',photo:'p_pocket',pos:'65% 50%',
   desc:'para tomar antes de moverte. guaraná, remolacha y l-citrulina para rendir más y aguantar más.',when:'30 min antes de entrenar',caf:'110 mg · guaraná',
   tipT:'30 minutos antes',tipD:'es el tiempo que tarda la cafeína en hacer efecto. después, estirá y rehidratate.',
   keys:[['guaraná','mejora el rendimiento'],['remolacha','más oxígeno al músculo'],['l-citrulina','flujo sanguíneo'],['beta-alanina','retrasa la fatiga']]},
- reset:{num:'m.04',name:'reset',moment:'el día después',can:'can_reset_cut',sym:'sym_reset',flavor:'coco + ginger',photo:'p_fridge',pos:'50% 40%',
+ reset:{color:'#ffb000',ink:'#111',tags:'recuperación - descanso\nel día después - reboot',num:'m.04',name:'reset',moment:'el día después',can:'can_reset_cut',sym:'sym_reset',flavor:'coco + ginger',photo:'p_fridge',pos:'50% 40%',
   desc:'para volver a ser vos después de una noche larga. yerba mate suave, electrolitos para rehidratar y jengibre para el estómago.',when:'a la mañana siguiente',caf:'50 mg · yerba mate',
   tipT:'sol y desayuno',tipD:'un poco de luz natural, algo de comer y reset. tu cuerpo te lo agradece.',
   keys:[['yerba mate','energía suave'],['agua de coco + electrolitos','rehidratar'],['jengibre','asienta el estómago'],['cardo mariano','cuida el hígado']]}
@@ -352,13 +394,23 @@ paint();
 document.addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(!b)return;cart++;try{localStorage.setItem('modo-cart',cart)}catch(_){}paint();const t=$('#toast');t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1600);});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-modo]');if(b)location.hash='modos/'+b.dataset.modo;});
 // modo detail
-function showModo(id){const m=MODOS[id]||MODOS.focus;
- $('#m-crumb').textContent=m.name;$('#m-sym').src=img(m.sym);$('#m-sym2').src=img(m.sym);$('#m-can').src=img(m.can);$('#m-can').alt='lata '+m.num+' '+m.name;
- $('#m-num').textContent=m.num+' · '+m.flavor;$('#m-name').textContent=m.name;$('#m-moment').textContent=m.moment;$('#m-desc').textContent=m.desc;
+let curModo='focus',qty=1;
+function showModo(id){const m=MODOS[id]||MODOS.focus;curModo=MODOS[id]?id:'focus';qty=1;$('#m-qty').textContent=qty;
+ const band=$('#m-band');band.style.setProperty('--mc',m.color);band.style.setProperty('--mi',m.ink);
+ $('#m-mark').src=img(m.ink==='#fff'?'logo_white':'logo');
+ $('#m-crumb').textContent=m.name;$('#m-sym2').src=img(m.sym);$('#m-can').src=img(m.can);$('#m-shadow').src=img(m.can);$('#m-can').alt='lata '+m.num+' '+m.name;
+ $('#m-num').textContent=m.num;$('#m-name').textContent=m.name;$('#m-tags').textContent=m.tags;$('#m-flavor').textContent=m.flavor;
+ $('#m-moment').textContent=m.moment;$('#m-desc').textContent=m.desc;
  $('#m-when').textContent=m.when;$('#m-caf').textContent=m.caf;$('#m-tipH').textContent='tip '+m.name;$('#m-tipT').textContent=m.tipT;$('#m-tipD').textContent=m.tipD;
  $('#m-photo').src=img(m.photo);$('#m-photo').style.objectPosition=m.pos;$('#m-photo').alt='modo '+m.name;
  $('#m-keys').innerHTML=m.keys.map(k=>`<div class="keyrow"><span style="font-weight:700">${k[0]}</span><span style="color:#444;text-align:right">${k[1]}</span></div>`).join('');
  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.modo===id));}
+const IDS=Object.keys(MODOS);
+$('#m-prev').onclick=()=>{location.hash='modos/'+IDS[(IDS.indexOf(curModo)+IDS.length-1)%IDS.length]};
+$('#m-next').onclick=()=>{location.hash='modos/'+IDS[(IDS.indexOf(curModo)+1)%IDS.length]};
+$('#m-inc').onclick=()=>{qty=Math.min(qty+1,24);$('#m-qty').textContent=qty};
+$('#m-dec').onclick=()=>{qty=Math.max(qty-1,1);$('#m-qty').textContent=qty};
+$('#m-add').onclick=()=>{cart+=qty;try{localStorage.setItem('modo-cart',cart)}catch(_){}paint();const t=$('#toast');t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1600);};
 // router
 function route(){const h=(location.hash||'#inicio').slice(1);const [page,sub]=h.split('/');const p=['inicio','modos','ingredientes','tienda'].includes(page)?page:'inicio';
  document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.id==='p-'+p));
